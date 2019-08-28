@@ -1,20 +1,16 @@
 version: 0.2
 
-env:
-  variables:
-    build_version: "19.7"
-
 phases:
   pre_build:
     commands:
       - echo "Copying files to tomcat folder"
-      - mkdir -p ./tomcat-$build_version/
-      - cp -r scripts ./tomcat-$build_version/
-      - cp index.html ./tomcat-$build_version/
+      - mkdir -p ./tomcat/
+      - cp -r scripts ./tomcat/
+      - cp index.html ./tomcat/
   build:
     commands:
       - echo "Building the tar"
-      - zip ./tomcat-$build_version.zip ./tomcat-$build_version/scripts/* appspec.yml
+      - zip ./tomcat.zip ./tomcat/scripts/* appspec.yml
 artifacts:
   files:
-    - tomcat-*.zip
+    - tomcat.zip
