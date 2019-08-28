@@ -13,5 +13,4 @@ phases:
     #  - zip ./tomcat.zip ./tomcat/scripts/* ./tomcat/index.html appspec.yml
 artifacts:
   files:
-     - **/*
-  base-directory: tomcat
+     - tomcat
