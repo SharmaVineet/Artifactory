@@ -5,6 +5,9 @@ env:
     build_version: "19.7"
 
 phases:
+install:
+    runtime-versions:
+        java: openjdk8
   pre_build:
     commands:
       - echo "Copying files to tomcat folder"
