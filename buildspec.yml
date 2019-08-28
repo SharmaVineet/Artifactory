@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo "Building the tar"
-      - zip ./tomcat.zip ./tomcat/scripts/* appspec.yml
+      - zip ./tomcat.zip ./tomcat/scripts/* ./tomcat/index.html appspec.yml
 artifacts:
   files:
     - tomcat.zip
