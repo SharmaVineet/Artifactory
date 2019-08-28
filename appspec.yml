@@ -5,7 +5,9 @@ files:
     destination: /var/www/html/
 hooks:
   BeforeInstall:
-    - location: 
+    - location: tomcat/scripts/version_upgrade
+      timeout: 300
+      runas: root
     - location: tomcat/scripts/install_dependencies
       timeout: 300
       runas: root
@@ -16,4 +18,3 @@ hooks:
     - location: tomcat/scripts/stop_server
       timeout: 300
       runas: root
-
