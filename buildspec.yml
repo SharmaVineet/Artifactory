@@ -8,8 +8,8 @@ phases:
       - cp -r scripts ./tomcat/
       - cp index.html ./tomcat/
   build:
-    #commands:
-    #  - echo "Building the tar"
+    commands:
+      - echo "Building the tar"
     #  - zip ./tomcat.zip ./tomcat/scripts/* ./tomcat/index.html appspec.yml
 artifacts:
   files:
