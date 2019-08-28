@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    build_version: "0.1"
+    build_version: "19.7"
 
 phases:
   install:
@@ -10,21 +10,15 @@ phases:
       - apt-get install gcc make -y
   pre_build:
     commands:
-      - mkdir -p ./cbsample-$build_version/DEBIAN
-      - mkdir -p ./cbsample-$build_version/usr/lib
-      - mkdir -p ./cbsample-$build_version/usr/include
-      - mkdir -p ./cbsample-$build_version/usr/bin
-      - cp -f cbsample.control ./cbsample-$build_version/DEBIAN/control
+      - echo "Copying files to tomcat folder"
+      - mkdir -p ./tomcat-$build_version/
+      - cp -r scripts ./tomcat-$build_version/
+      - cp appspec.yml ./tomcat-$build_version/
+      - cp index.html ./tomcat-$build_version/
   build:
     commands:
-      - echo "Building the application"
-      - make
-      - cp libcbsamplelib.so ./cbsample-$build_version/usr/lib
-      - cp cbsamplelib.h ./cbsample-$build_version/usr/include
-      - cp cbsampleutil ./cbsample-$build_version/usr/bin
-      - chmod +x ./cbsample-$build_version/usr/bin/cbsampleutil
-      - dpkg-deb --build ./cbsample-$build_version
-
+      - echo "Building the tar"
+      - tar -czf ./tomcat-$build_version.tgz ./tomcat-$build_version/
 artifacts:
   files:
-    - cbsample-*.deb
+    - tomcat-*.tgz
