@@ -5,12 +5,12 @@ phases:
     commands:
       - echo "Copying files to tomcat folder"
       - mkdir -p ./tomcat/
-      - cp -r scripts ./tomcat/
-      - cp index.html ./tomcat/
   build:
     commands:
       - echo "Building the tar"
-      - zip ./tomcat.zip ./tomcat/scripts/* ./tomcat/index.html appspec.yml
+      - cp -r scripts ./tomcat/
+      - cp index.html ./tomcat/
 artifacts:
   files:
-     - tomcat.zip
+     - tomcat/**/*
+     - appspec.yml
