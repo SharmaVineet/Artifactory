@@ -1,0 +1,6 @@
+[
+  {
+    "name": "sample-app",
+    "imageUri": "242975790583.dkr.ecr.us-east-1.amazonaws.com/myfirstrepo:latest"
+  }
+]
