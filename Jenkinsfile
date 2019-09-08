@@ -33,7 +33,7 @@ stages {
 		}
 	}
 
-	stage('Docker Build') {
+	stage('Docker Run') {
 		steps{
 			sh 'image_id=`docker images -q`'
 			sh 'docker container run -it -d -p 80:80 $image_id'
