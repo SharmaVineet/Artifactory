@@ -17,7 +17,7 @@ stages {
 	stage('Container Cleanup') {
 		steps {
 			script {
-				if (! -z $(docker container ps -aq)) {
+				if ( ! -z $(docker container ps -aq) ) {
 					docker container stop $(docker container ps -aq)
 					docker container rm $(docker container ps -aq)
 				} else {
