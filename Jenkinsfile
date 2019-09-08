@@ -13,14 +13,14 @@ stages {
 		}
 	}
 	
-#	stage('Container Cleanup') {
-#		steps {
-#			echo "Stopping Containers"
-#			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
-#			echo "Removing Containers"
-#			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
-#		}
-#	}
+	/*stage('Container Cleanup') {
+		steps {
+			echo "Stopping Containers"
+			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
+			echo "Removing Containers"
+			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
+		}
+	}*/
 
 	stage('Container Image Cleanup') {
 		steps{
