@@ -16,14 +16,8 @@ stages {
 	
 	stage('Container Cleanup') {
 		steps {
-			script {
-				if (! -z "\$(docker container ps -aq)") {
-					docker container stop $(docker container ps -aq)
-					docker container rm $(docker container ps -aq)
-				} else {
-					echo "There is No Container Running"
-				}
-			}
+			echo "Stopping and Removing Containers"
+			sh '[ ! -z "$(docker ps -aq)" ] && docker container rm -f $(docker ps -aq)'
 		}
 	}
 
