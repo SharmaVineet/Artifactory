@@ -16,14 +16,16 @@ stages {
 	
 	stage('Container Cleanup') {
 		steps {
-			echo "Stopping and Removing Containers"
-			sh '[ ! -z "$(docker ps -aq)" ] && docker container rm -f $(docker ps -aq)'
+			echo "Stopping Containers"
+			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
+			echo "Removing Containers"
+			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
 		}
 	}
 
 	stage('Container Image Cleanup') {
 		steps{
-			sh 'docker rmi $(docker images -q)'
+			sh 'docker images -q| xargs --no-run-if-empty  docker rmi'
 		}
 	}
 	
