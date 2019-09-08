@@ -15,15 +15,14 @@ stages {
 	
 	stage('Container Cleanup') {
 		steps{
-			sh 'container_id=`docker container ps -aq`'
-			sh 'for container in `echo $container_id`; do echo "Stopping Docker Container ID $container"; docker container stop $container;echo "Removing Docker Container ID $container";docker container rm $container;done;'		
+			sh 'docker container stop $(docker container ps -aq)'
+			sh 'docker container rm $(docker container ps -aq)'
 		}
 	}
 
 	stage('Container Image Cleanup') {
 		steps{
-			sh 'image_id=`docker images -q`'
-			sh 'for image in `echo $container_id`; do echo "Removing Docker Image ID $image";docker rmi $image;done;'		
+			sh 'docker rmi $(docker images -q)'
 		}
 	}
 	
@@ -33,10 +32,9 @@ stages {
 		}
 	}
 
-	stage('Docker Build') {
+	stage('Docker Run') {
 		steps{
-			sh 'image_id=`docker images -q`'
-			sh 'docker container run -it -d -p 80:80 $image_id'
+			sh 'docker container run -it -d -p 80:80 $(docker images -q)'
 		}
 	}
   }
