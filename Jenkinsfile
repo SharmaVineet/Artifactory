@@ -1,13 +1,13 @@
 pipeline {
 agent any
    environment {
-        Docker_Password = credentials('Docker_Login_Password')
+        Docker_Pass = credentials('Docker_Password')
    }
 stages {
    stage('Docker Pull') {
     steps {
      echo "Docker Login"
-     sh 'docker login -u pacfisit1989 -p $Docker_Password'
+     sh 'docker login -u pacfisit1989 -p $Docker_Pass'
      echo "Docker Pull"  
      sh 'docker pull nginx'
     }
