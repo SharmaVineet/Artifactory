@@ -1,0 +1,6 @@
+- hosts: remote-server
+  gather_facts: true
+  
+  tasks:
+    - name: Running echo command to check things are fine
+      shell: echo "Everything is good"

@@ -3,7 +3,6 @@ agent any
    environment {
         Docker_Pass = credentials('Docker_Password')
         Docker_User = credentials('Docker_Username')
-        Version = '1'
         Image_Name = 'mynginx'
    }
 stages {
@@ -14,14 +13,14 @@ stages {
 		}
 	}
 	
-	stage('Container Cleanup') {
-		steps {
-			echo "Stopping Containers"
-			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
-			echo "Removing Containers"
-			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
-		}
-	}
+#	stage('Container Cleanup') {
+#		steps {
+#			echo "Stopping Containers"
+#			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
+#			echo "Removing Containers"
+#			sh 'docker ps -qa|xargs --no-run-if-empty docker container stop'
+#		}
+#	}
 
 	stage('Container Image Cleanup') {
 		steps{
@@ -31,14 +30,21 @@ stages {
 	
 	stage('Docker Build') {
 		steps{
-			sh 'docker build -t $Docker_User/$Image_Name:$Version .'
+			sh 'docker build -t $Docker_User/$Image_Name .'
 		}
 	}
 
-	stage('Docker Run') {
+	stage('Docker Push') {
 		steps{
-			sh 'docker container run -it -d -p 80:80 $(docker images $Docker_User/$Image_Name:$Version -q)'
+			sh 'docker push $Docker_User/$Image_Name'
 		}
+	}
+	
+	stage('Ansible Run') {
+		ansiblePlaybook(
+		inventory: /etc/hosts
+		playbook: ansiblePlaybook.yml
+		)
 	}
   }
 }
