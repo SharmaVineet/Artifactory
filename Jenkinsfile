@@ -41,11 +41,16 @@ stages {
 	}
 	
 	stage('Ansible Run') {
-		withEnv(["PATH+ANSIBLE"=${tool '2.4.6.0'}]) {
-			ansiblePlaybook(
+		withEnv(["PATH+ANSIBLE=${tool '2.4.6.0'}"]) {
+			sh 'echo $PATH'	
+			sh 'ls -lart'
+			sh 'ansible --verion'
+			sh 'which ansible'
+			
+		ansiblePlaybook (
 			inventory: '/etc/hosts',
 			playbook: 'ansiblePlaybook.yml'
-			)
+		)
 		}
 	}
   }
