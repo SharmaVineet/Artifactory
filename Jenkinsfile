@@ -45,8 +45,8 @@ stages {
 			ansiblePlaybook (
 				inventory: '/etc/hosts',
 				playbook: 'ansiblePlaybook.yml',
-				colorized: true )
-			}
+				colorized: true
+			)
 		}
 	}
   }
