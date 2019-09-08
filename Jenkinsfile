@@ -3,8 +3,8 @@ agent any
    environment {
         Docker_Pass = credentials('Docker_Password')
         Docker_User = credentials('Docker_Username')
-        Version = 1
-        Image_Name = mynginx
+        Version = '1'
+        Image_Name = 'mynginx'
    }
 stages {
 	stage('Docker Login') {
