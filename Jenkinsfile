@@ -45,6 +45,8 @@ stages {
 			ansiblePlaybook (
 				inventory: '/etc/hosts',
 				playbook: 'ansiblePlaybook.yml',
+				sudoUser: 'ec2-user',
+				sudo: 'ec2-user',
 				colorized: true
 			)
 		}
