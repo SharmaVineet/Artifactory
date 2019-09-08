@@ -42,6 +42,8 @@ stages {
 	
 	stage('Ansible Run') {
 		steps {
+			sh 'whoami'
+			sh 'pwd'
 			ansiblePlaybook (
 				inventory: '/etc/hosts',
 				playbook: 'ansiblePlaybook.yml',
