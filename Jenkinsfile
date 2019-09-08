@@ -43,7 +43,7 @@ stages {
 	stage('Ansible Run') {
 		withEnv(["PATH+ANSIBLE"=${tool '2.4.6.0'}]) {
 			ansiblePlaybook(
-			inventory: '/etc/hosts'
+			inventory: '/etc/hosts',
 			playbook: 'ansiblePlaybook.yml'
 			)
 		}
