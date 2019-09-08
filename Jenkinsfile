@@ -1,7 +1,7 @@
 pipeline {
 agent any
    environment {
-        Docker_Password = credentials('Docker-Pass')
+        Docker_Password = credentials('Docker_Login_Password')
    }
 stages {
    stage('Docker Pull') {
