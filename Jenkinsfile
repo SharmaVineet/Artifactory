@@ -48,7 +48,7 @@ stages {
 				inventory: '/etc/hosts',
 				playbook: 'ansiblePlaybook.yml',
 				colorized: true,
-				extra= '-e ansible_ssh_user="ec2-user"'
+				extra: '-e ansible_ssh_user="ec2-user"'
 			)
 		}
 	}
