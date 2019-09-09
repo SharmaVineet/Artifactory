@@ -4,7 +4,7 @@ agent any
         Docker_Pass = credentials('Docker_Password')
         Docker_User = credentials('Docker_Username')
         Image_Name = 'mynginx'
-	Version = 1
+	Version = 2
    }
 stages {
 	stage('Docker Login') {
