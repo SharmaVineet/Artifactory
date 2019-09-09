@@ -49,13 +49,7 @@ stages {
 				inventory: '/etc/hosts',
 				playbook: 'ansiblePlaybook.yml',
 				colorized: true,
-				extras: [
-					ansible_ssh_user='ec2-user',
-					Ver='$Version',
-					user='$Docker_User',
-					pass='$Docker_Pass',
-					image='$Image_Name'
-				]
+				extras: '-vvvv -e ansible_ssh_user="ec2-user" Ver="$Version" user="$Docker_User" pass="$Docker_Pass" image="$Image_Name"'
 			)
 		}
 	}
