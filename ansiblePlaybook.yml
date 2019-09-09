@@ -30,6 +30,11 @@
       become_user: root
       when: "'version' not in version.stdout"
 
+    - name: Starting Docker Engine
+      shell: service docker start
+      become_user: root
+      when: "'version' not in version.stdout"
+
     - name: Docker login
       shell: docker login -u {{ user }} -p "{{ pass }}"
       register: login
