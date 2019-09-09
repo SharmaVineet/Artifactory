@@ -4,6 +4,7 @@ agent any
         Docker_Pass = credentials('Docker_Password')
         Docker_User = credentials('Docker_Username')
         Image_Name = 'mynginx'
+	Version = 1
    }
 stages {
 	stage('Docker Login') {
@@ -30,13 +31,13 @@ stages {
 	
 	stage('Docker Build') {
 		steps{
-			sh 'docker build -t $Docker_User/$Image_Name .'
+			sh 'docker build -t $Docker_User/$Image_Name:$Version .'
 		}
 	}
 
 	stage('Docker Push') {
 		steps{
-			sh 'docker push $Docker_User/$Image_Name'
+			sh 'docker push $Docker_User/$Image_Name:$Version'
 		}
 	}
 	
@@ -48,7 +49,7 @@ stages {
 				inventory: '/etc/hosts',
 				playbook: 'ansiblePlaybook.yml',
 				colorized: true,
-				extras: '-e ansible_ssh_user="ec2-user"'
+				extras: '-e ansible_ssh_user="ec2-user" Ver="$Version" user="$Docker_User" pass="Docker_Pass" image="$Image_Name"'
 			)
 		}
 	}

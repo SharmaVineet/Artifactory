@@ -4,3 +4,53 @@
   tasks:
     - name: Running echo command to check things are fine
       shell: echo "Everything is good"
+ 
+    - name: Checking Docker Version
+      shell: docker --version
+      register: version
+
+    - debug: msg={{ version }}
+
+    - name: Running yum update
+      yum:
+    	name: '*'
+    	state: latest
+      when: "'version' not in {{ version }}"
+
+    - name: Running yum install docker
+      yum:
+       name: docker
+       state: present
+      when: "'version' not in {{ version }}"
+
+    - name: Running add user command
+      shell: sudo usermod -aG docker ec2-user
+      when: "'version' not in {{ version }}"
+
+    - name: Docker login
+      shell: docker login -u {{ user }} -p "{{ pass }}"
+      register: login
+
+    - name: Docker pull image
+      docker_image:
+         name: "{{ user }}/{{ image }}:{{ Ver }}"
+         source: pull
+      when: "'Succeeded' in '{{ login }}'"
+
+    - name: Docker Container Stop Old
+      docker_container:
+        name: mycontainer
+        state: stopped
+
+    - name: Docker Container Remove Old
+      docker_container:
+         name: mycontainer
+         state: absent
+
+    - name: Docker Container Run
+      docker_container:
+         name: mycontainer
+         image: "{{ user }}/{{ image }}:{{ Ver }}"
+         ports:
+            - "80:80"
+
