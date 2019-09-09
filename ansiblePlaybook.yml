@@ -8,6 +8,7 @@
     - name: Checking Docker Version
       shell: docker --version
       register: version
+      ignore_errors: true
 
     - debug: msg={{ version }}
 
