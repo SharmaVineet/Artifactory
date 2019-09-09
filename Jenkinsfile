@@ -50,7 +50,6 @@ stages {
 				playbook: 'ansiblePlaybook.yml',
 				colorized: true,
 				extras: [
-					-vvvv,
 					ansible_ssh_user='ec2-user',
 					Ver='$Version',
 					user='$Docker_User',
