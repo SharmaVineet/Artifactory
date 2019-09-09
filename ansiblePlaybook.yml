@@ -13,8 +13,8 @@
 
     - name: Running yum update
       yum:
-    	name: '*'
-    	state: latest
+        name: '*'
+        state: latest
       when: "'version' not in {{ version }}"
 
     - name: Running yum install docker
