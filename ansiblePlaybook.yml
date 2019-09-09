@@ -41,7 +41,8 @@
 
     - name: Docker pull image
       docker_image:
-         name: "{{ user }}/{{ image }}:{{ Ver }}"
+         name: "{{ user }}/{{ image }}"
+         tag: "{{ Ver }}"
          source: pull
       when: "'Succeeded' in login.stdout"
 
