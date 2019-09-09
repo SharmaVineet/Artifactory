@@ -43,7 +43,6 @@
       docker_image:
          name: "{{ user }}/{{ image }}"
          tag: "{{ Ver }}"
-         source: pull
       when: "'Succeeded' in login.stdout"
 
     - name: Docker Container Stop Old
