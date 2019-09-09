@@ -16,17 +16,17 @@
       yum:
         name: '*'
         state: latest
-      when: "'version' not in {{ version }}"
+      when: "'version' not in version.stdout"
 
     - name: Running yum install docker
       yum:
        name: docker
        state: present
-      when: "'version' not in {{ version }}"
+      when: "'version' not in version.stdout"
 
     - name: Running add user command
       shell: sudo usermod -aG docker ec2-user
-      when: "'version' not in {{ version }}"
+      when: "'version' not in version.stdout"
 
     - name: Docker login
       shell: docker login -u {{ user }} -p "{{ pass }}"
@@ -36,7 +36,7 @@
       docker_image:
          name: "{{ user }}/{{ image }}:{{ Ver }}"
          source: pull
-      when: "'Succeeded' in '{{ login }}'"
+      when: "'Succeeded' in login.stdout"
 
     - name: Docker Container Stop Old
       docker_container:
@@ -54,4 +54,3 @@
          image: "{{ user }}/{{ image }}:{{ Ver }}"
          ports:
             - "80:80"
-
