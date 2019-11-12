@@ -1,1 +1,1 @@
-# Artifactoryy
+# Artifactory
